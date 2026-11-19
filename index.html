@@ -1,316 +1,782 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yitong Liu</title>
-  <meta name="description" content="Yitong Liu — PhD candidate in Sociology at Brown University with concurrent master’s training in Data Science." />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Yitong Liu | Sociology, Brown University</title>
+    <meta name="author" content="Yitong Liu">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <script>
+      (function () {
+        var KEY = 'theme';
+        function apply(night) {
+          document.documentElement.classList.toggle('night', night);
+        }
+        var saved = null;
+        try { saved = localStorage.getItem(KEY); } catch (e) {}
+        var forced = null;
+        try {
+          var q = new URLSearchParams(window.location.search).get('theme');
+          if (q === 'night') forced = true;
+          if (q === 'day') forced = false;
+        } catch (e) {}
+        var night = forced !== null
+          ? forced
+          : (saved === 'night' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches));
+        apply(night);
+        window.__setTheme = function (night, persist) {
+          apply(night);
+          if (persist !== false) {
+            try { localStorage.setItem(KEY, night ? 'night' : 'day'); } catch (e) {}
+          }
+          document.dispatchEvent(new CustomEvent('themechange', { detail: { night: night } }));
+        };
+        window.__isNight = function () {
+          return document.documentElement.classList.contains('night');
+        };
+        try {
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+            try { if (localStorage.getItem(KEY)) return; } catch (err) {}
+            window.__setTheme(e.matches, false);
+          });
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="description" content="Yitong Liu is a Ph.D. candidate in Sociology at Brown University studying work, organizations, and AI innovation in the United States and China.">
+    <meta property="og:title" content="Yitong Liu | Sociology, Brown University">
+    <meta property="og:description" content="Ph.D. candidate in Sociology at Brown University studying work, organizations, and AI innovation in the United States and China.">
+    <meta property="og:type" content="profile">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Yitong Liu","jobTitle":"Ph.D. Candidate in Sociology","affiliation":{"@type":"CollegeOrUniversity","name":"Brown University"},"email":"mailto:yitong_liu@brown.edu","knowsAbout":["Sociology of work","Organizations","Artificial intelligence","Science and technology studies"]}</script>
+    <meta property="og:title" content="Yitong Liu | Sociology, Brown University">
+    <meta property="og:description" content="Ph.D. candidate in Sociology at Brown University studying work, organizations, and AI innovation in the United States and China.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="icon" href="images/favicon.png">
+  </head>
+  <body>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Switch to night mode" title="Night mode">
+      <svg class="theme-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 14.3A8.5 8.5 0 0 1 9.7 3 7 7 0 1 0 21 14.3z"></path>
+      </svg>
+      <svg class="theme-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.2"></circle>
+        <path d="M12 2.5v2.2M12 19.3v2.2M4.7 4.7l1.6 1.6M17.7 17.7l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.7 19.3l1.6-1.6M17.7 6.3l1.6-1.6"></path>
+      </svg>
+    </button>
+    <!-- Network Background -->
+    <canvas id="network-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;"></canvas>
 
-  <style>
-    :root{
-      --bg: #ffffff;
-      --fg: #111827;
-      --muted: #4b5563;
-      --rule: #e5e7eb;        /* light gray line */
-      --accent: #0f766e;
-      --max: 1120px;
-    }
+    <table style="width:100%;max-width:900px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+      <tbody>
+        <tr style="padding:0px">
+          <td style="padding:0px">
 
-    * { box-sizing: border-box; }
-    body{
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      line-height: 1.65;
-    }
-    a{ color: #111827; text-decoration: underline; text-underline-offset: 3px; }
-    a:hover{ text-decoration-thickness: 2px; }
+            <!-- PROFILE -->
+            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr style="padding:0px" class="profile-row">
+                  <td style="padding:20px 2.5%;width:63%;vertical-align:middle" class="profile-text-cell">
+                    <p class="name typing-intro" style="text-align: center;" aria-label="Hello, nice to meet you. I am Yitong Liu">
+                      <span class="typed-greeting" id="typed-greeting"></span><br>
+                      <span class="typed-name" id="typed-name"></span><span class="typed-cursor" id="typed-cursor" aria-hidden="true">|</span>
+                    </p>
+                    <script>
+                      (function () {
+                        var greeting = 'Hello, nice to meet you. I am';
+                        var name = 'Yitong Liu';
+                        var greetingEl = document.getElementById('typed-greeting');
+                        var nameEl = document.getElementById('typed-name');
+                        var cursorEl = document.getElementById('typed-cursor');
+                        var i = 0;
+                        var speed = 45;
+                        function typeGreeting() {
+                          if (i < greeting.length) {
+                            greetingEl.textContent += greeting.charAt(i); i++;
+                            setTimeout(typeGreeting, speed);
+                          } else { i = 0; setTimeout(typeName, 350); }
+                        }
+                        function typeName() {
+                          if (i < name.length) {
+                            nameEl.textContent += name.charAt(i); i++;
+                            setTimeout(typeName, speed + 15);
+                          } else {
+                            nameEl.innerHTML = '<span class="typed-nick">Yitong</span> Liu';
+                            cursorEl.classList.add('typed-cursor--done');
+                            requestAnimationFrame(function () {
+                              requestAnimationFrame(function () {
+                                var nick = nameEl.querySelector('.typed-nick');
+                                if (nick) nick.classList.add('typed-nick--on');
+                              });
+                            });
+                          }
+                        }
+                        typeGreeting();
+                      })();
+                    </script>
+                    <div class="profile-photo-mobile">
+                      <a href="images/yitong_portrait.jpg">
+                        <img style="width:100%; max-width:100%; border-radius:50%;" alt="Portrait of Yitong Liu" src="images/yitong.jpg" class="profile-photo">
+                      </a>
+                    </div>
+                    <p>I am a Ph.D. candidate in Sociology at <a href="https://sociology.brown.edu/">Brown University</a>, where I also earned an M.S. in Data Science. I study work, organizations, and technology. I am co-advised by <a href="https://sociology.brown.edu/people/andrew-schrank">Andrew Schrank</a> and <a href="https://sociology.brown.edu/people/han-zhang">Han Zhang</a>.</p>
+                    <p>While a growing literature asks how AI shapes society, I ask the question in reverse: <strong>how do social relations, labor regimes, and organizational arrangements shape AI innovation in the first place?</strong> Through organizational ethnography across the AI innovation chain in the United States and China, I study how human contributions to AI are evaluated and differentiated: which are valued and recognized, and which are obscured and reclassified as machine performance.</p>
+                    <p>In 2026, I was a Ph.D. Research Intern at <a href="https://www.microsoft.com/en-us/research/">Microsoft Research</a>, mentored by <a href="https://nancybaym.com/">Nancy Baym</a>, where I studied human&ndash;AI coordination and workflow optimization.</p>
+                    <p><strong>I am on the 2026&ndash;27 academic job market.</strong></p>
+                    <p class="social-links" style="text-align:center">
+                      <a href="Yitong_Liu_CV.pdf">CV</a> &nbsp;/&nbsp;
+                      <a href="mailto:yitong_liu@brown.edu">Email</a>
+                      <!-- Add more links here, e.g.:  &nbsp;/&nbsp; <a href="https://scholar.google.com/...">Scholar</a>  &nbsp;/&nbsp; <a href="https://www.linkedin.com/in/...">LinkedIn</a> -->
+                    </p>
+                  </td>
+                  <td style="padding:20px 2.5%;width:32%;max-width:32%" class="profile-photo-cell">
+                    <a href="images/yitong_portrait.jpg">
+                      <img style="width:100%; max-width:100%; border-radius:50%;" alt="Portrait of Yitong Liu" src="images/yitong.jpg" class="profile-photo">
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 34px 18px 80px;
-    }
+            <!-- RECENT NEWS -->
+            <table id="news" class="news-section" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr>
+                  <td style="padding:20px 2.5%;width:100%;vertical-align:middle">
+                    <h2>Recent News</h2>
+                    <ul class="news-list">
+                      <li class="news-item">
+                        <span class="news-date">[Oct 2026]</span>
+                        <span class="news-content">&ldquo;Coordination Without Collaboration&rdquo; conditionally accepted at <em>Politics &amp; Society</em>.</span>
+                      </li>
+                      <li class="news-item">
+                        <span class="news-date">[2026]</span>
+                        <span class="news-content">Received the China Initiative Dissertation Award.</span>
+                      </li>
+                      <li class="news-item">
+                        <span class="news-date">[Aug 2026]</span>
+                        <span class="news-content">Presented two papers at the American Sociological Association Annual Meeting (Organizational Sociology; Methodology).</span>
+                      </li>
+                      <li class="news-item">
+                        <span class="news-date">[Jun 2026]</span>
+                        <span class="news-content">Gave a parallel talk at the International Conference on Computational Social Science (IC<sup>2</sup>S<sup>2</sup>).</span>
+                      </li>
+                      <li class="news-item">
+                        <span class="news-date">[Jun 2026]</span>
+                        <span class="news-content">Started as a Ph.D. Research Intern at Microsoft Research in Redmond.</span>
+                      </li>
+                      <li class="news-item">
+                        <span class="news-date">[2025]</span>
+                        <span class="news-content">Completed an M.S. in Data Science at Brown University.</span>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-    .top{
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 56px;
-      align-items: start;
-    }
-    @media (max-width: 980px){
-      .top{ grid-template-columns: 1fr; gap: 22px; }
-    }
+            <!-- RESEARCH -->
+            <table class="teaching-section" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr>
+                  <td style="padding:20px 2.5%;width:100%;vertical-align:middle">
+                    <h2>Research</h2>
+                    <ul class="teaching-list">
+                      <li class="teaching-item">
+                        <div class="teaching-role research-title">Book project: <em>Human in / off the Loop: Organizing Expertise in Artificial Intelligence</em></div>
+                        <div class="research-desc">Why is the same human labor concealed as repetitive work in one frontier of AI yet foregrounded as expert demonstration in another? Drawing on 12 months of ethnography, working inside a frontier research institute and startups in Seattle and Hangzhou and data annotation firms across China, my dissertation compares the development of large language models in the United States with embodied robotics in China, the leading domains of AI innovation in each country. I argue that the value of human input depends on how settled a technology is and how much legitimacy it enjoys among scientists and investors, and that the U.S.&ndash;China AI race locks these differences into distinct national pathways.</div>
+                      </li>
+                      <li class="teaching-item">
+                        <div class="teaching-role research-title">AI and the future of knowledge work</div>
+                        <div class="research-desc">At Microsoft Research, I combined 40 work-shadowing sessions with six teams with individual- and team-level telemetry on AI use. I develop the concept of <em>asymmetric scalability</em>: AI scales technical tasks faster than the social coordination those tasks require. Ongoing papers examine the temporality of AI-assisted work and how coordination costs and productivity shift within teams as AI use grows.</div>
+                      </li>
+                      <li class="teaching-item">
+                        <div class="teaching-role research-title">Technology, cultural politics, and computational methods</div>
+                        <div class="research-desc">I treat digital artifacts, from platform metrics and social media posts to LLM outputs, as evidence for long-standing debates about representation, status, and differentiation. This includes work on platformized governance of contention in China, on how LLMs reason about race, gender, and class, and on the epistemology of AI-assisted qualitative analysis.</div>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-    /* LEFT column */
-    .left{
-      position: sticky;
-      top: 22px;
-      text-align: center;  /* (3) center align the three lines */
-    }
-    @media (max-width: 980px){
-      .left{ position: static; }
-    }
+            <!-- PAPERS -->
+            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr>
+                  <td style="padding:20px 2.5%;width:100%;vertical-align:middle">
+                    <h2>Papers</h2>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="papers-carousel-container">
+              <div class="carousel-nav carousel-prev" onclick="changePaper(-1)">&lsaquo;</div>
+              <div class="papers-carousel-wrapper">
+            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;" class="papers-table">
+              <tbody>
 
-    .photo-wrap{
-      display: flex;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
+                <tr class="paper-item no-link">
+                  <td style="padding:20px;width:20%;vertical-align:middle">
+                    <span class="paper-tag paper-tag--accepted">Cond. accepted</span>
+                  </td>
+                  <td style="padding:20px;width:80%;vertical-align:middle">
+                    <span class="papertitle">Coordination Without Collaboration: China&rsquo;s Homeowner Mobilization under Datafication</span>
+                    <br><strong>Yitong Liu</strong>
+                    <br><em>Politics &amp; Society</em>, conditionally accepted
+                  </td>
+                </tr>
 
-    .photo{
-      width: 240px;
-      height: 240px;
-      object-fit: cover;
-      border-radius: 22px;         /* square with rounded edges */
-      border: 1px solid var(--rule);
-      background: #fff;
-    }
+                <tr class="paper-item no-link">
+                  <td style="padding:20px;width:20%;vertical-align:middle">
+                    <span class="paper-tag">Manuscript</span>
+                  </td>
+                  <td style="padding:20px;width:80%;vertical-align:middle">
+                    <span class="papertitle">Automation Legitimacy and the Organization of Human Expertise in LLM Innovation</span>
+                    <br><strong>Yitong Liu</strong>
+                    <br><em>Presented at the ASA Annual Meeting, Organizational Sociology session, 2026</em>
+                  </td>
+                </tr>
 
-    .name{
-      font-size: 54px;
-      line-height: 1.05;
-      margin: 10px 0 0;
-      letter-spacing: -0.03em;
-      font-weight: 800;
-    }
+                <tr class="paper-item no-link">
+                  <td style="padding:20px;width:20%;vertical-align:middle">
+                    <span class="paper-tag">Manuscript</span>
+                  </td>
+                  <td style="padding:20px;width:80%;vertical-align:middle">
+                    <span class="papertitle">Asymmetric Scalability: Coordination Problems in AI-Delegated Work</span>
+                    <br><strong>Yitong Liu</strong>
+                  </td>
+                </tr>
 
-    .role{
-      margin: 10px 0 0;
-      font-size: 26px;
-      font-weight: 750;
-      color: var(--accent);
-    }
+                <tr class="paper-item no-link">
+                  <td style="padding:20px;width:20%;vertical-align:middle">
+                    <span class="paper-tag">Manuscript</span>
+                  </td>
+                  <td style="padding:20px;width:80%;vertical-align:middle">
+                    <span class="papertitle">Do LLMs Think Intersectionally? Evidence from Chain-of-Thought Reasoning</span>
+                    <br><strong>Yitong Liu</strong> and Han Zhang
+                    <br><em>Presented at IC<sup>2</sup>S<sup>2</sup> 2026 and the ASA Annual Meeting, Methodology session, 2026</em>
+                  </td>
+                </tr>
 
-    .affil{
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 18px;
-    }
+                <tr class="paper-item no-link">
+                  <td style="padding:20px;width:20%;vertical-align:middle">
+                    <span class="paper-tag">Manuscript</span>
+                  </td>
+                  <td style="padding:20px;width:80%;vertical-align:middle">
+                    <span class="papertitle">Is the Public Debate over Climate Science Finally Over? Evidence from Social Media Discussions of Climate Change</span>
+                    <br><strong>Yitong Liu</strong> and Rachel Wetts
+                    <br><em>Presented at the Population Association of America Annual Meeting, 2025</em>
+                  </td>
+                </tr>
 
-    .icons{
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-top: 22px;
-    }
-    .icon-btn{
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      border: 1px solid var(--rule);
-      background: #ffffff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 22px rgba(0,0,0,.06);
-      transition: transform .12s ease, box-shadow .12s ease;
-      text-decoration: none;
-    }
-    .icon-btn:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(0,0,0,.10);
-    }
-    .icon-btn svg{
-      width: 20px;
-      height: 20px;
-      fill: #111827;
-    }
-
-    /* RIGHT column */
-    .right{
-      font-size: 18px;
-    }
-
-    .section{
-      padding: 0;
-      margin: 0;
-    }
-
-    /* (7) light gray line between sections */
-    .divider{
-      border: 0;
-      height: 1px;
-      background: var(--rule);
-      margin: 22px 0;
-    }
-
-    h2{
-      margin: 0 0 10px;
-      font-size: 16px;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 750;
-    }
-
-    .item{
-      margin: 0 0 14px;
-    }
-    .item b{
-      font-weight: 750;
-    }
-    .meta{
-      color: var(--muted);
-    }
-
-    ul{ margin: 10px 0 0 18px; padding: 0; }
-    li{ margin: 6px 0; }
-
-    .cvframe{
-      width: 100%;
-      height: 980px;
-      border: 1px solid var(--rule);
-      border-radius: 16px;
-      background: #fff;
-      margin-top: 12px;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-    <div class="top">
-      <!-- LEFT -->
-      <aside class="left">
-        <div class="photo-wrap">
-          <img class="photo" src="assets/Profile_photo.jpg" alt="Yitong Liu" />
-        </div>
-
-        <!-- (1) name -->
-        <div class="name">Yitong Liu</div>
-
-        <!-- (2) title -->
-        <div class="role">PhD candidate</div>
-
-        <!-- (3) centered via text-align: center -->
-        <div class="affil">Brown University</div>
-
-        <div class="icons" aria-label="contact links">
-          <!-- Email button -->
-          <a class="icon-btn" href="mailto:yitong_liu@brown.edu" aria-label="Email">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
-          </a>
-
-          <!-- GitHub button -->
-          <a class="icon-btn" href="https://github.com/nicoleliuu" target="_blank" rel="noopener" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 .5C5.73.5.75 5.64.75 12.02c0 5.1 3.29 9.43 7.86 10.96.57.11.78-.25.78-.56
-              0-.28-.01-1.02-.02-2-3.2.71-3.87-1.58-3.87-1.58-.52-1.35-1.28-1.71-1.28-1.71-1.04-.73.08-.72.08-.72
-              1.15.08 1.75 1.2 1.75 1.2 1.02 1.79 2.68 1.27 3.33.97.1-.75.4-1.27.72-1.56-2.55-.3-5.23-1.3-5.23-5.8
-              0-1.28.45-2.33 1.19-3.15-.12-.3-.52-1.52.11-3.17 0 0 .97-.32 3.18 1.2.92-.26 1.9-.39 2.88-.39
-              .98 0 1.96.13 2.88.39 2.2-1.52 3.17-1.2 3.17-1.2.63 1.65.23 2.87.11 3.17.74.82 1.19 1.87 1.19 3.15
-              0 4.51-2.69 5.5-5.25 5.79.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.2.68.79.56
-              4.56-1.53 7.85-5.86 7.85-10.96C23.25 5.64 18.27.5 12 .5z"/>
-            </svg>
-          </a>
-        </div>
-      </aside>
-
-      <!-- RIGHT -->
-      <main class="right">
-        <!-- (5) order: intro -> education -> research -> experience -> awards -->
-        <section class="section" id="intro">
-          <!-- (4) your exact self-introduction -->
-          <p style="margin:0;">
-            I am a Ph.D. candidate in Sociology at Brown University with concurrent master’s training in Data Science.
-            The central thread of my research agenda are about (1) using AI to generate, leverage and evaluate large-scale social observation
-            data and (2) using computationally techniques to enhance experimental design and causal inference.
-          </p>
-        </section>
-
-        <hr class="divider" />
-
-        <section class="section" id="education">
-          <h2>Education</h2>
-          <div class="item">
-            <b>Brown University</b> — Ph.D. in Sociology; M.S. in Data Science
-            <div class="meta">Aug 2022 – Exp. May 2027</div>
-          </div>
-          <div class="item">
-            <b>Boston College</b> — B.A. in Sociology (Honors)
-            <div class="meta">Aug 2018 – Dec 2021</div>
-          </div>
-        </section>
-
-        <hr class="divider" />
-
-        <section class="section" id="research">
-          <h2>Research Projects</h2>
-
-          <!-- (6) each research item with a template PDF link in assets/ -->
-          <div class="item">
-            <b>Understanding AI Bias via Experimental and Computational Methods</b>
-            <div class="meta">
-              Dissertation project (Oct 2025 – Ongoing) 
+              </tbody>
+            </table>
+              </div>
+              <div class="carousel-nav carousel-next" onclick="changePaper(1)">&rsaquo;</div>
+              <div class="carousel-indicators"></div>
             </div>
-          </div>
 
-          <div class="item">
-            <b>Measuring LLM Reasoning Using Large-Scale Social Survey Data</b>
-            <div class="meta">
-              Project (Dec 2024 – Ongoing) ·
-              <a href="assets/LLM_Write_Up_2_updated.pdf" target="_blank" rel="noopener">link</a>
-            </div>
-          </div>
+            <!-- TEACHING -->
+            <table class="teaching-section" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr>
+                  <td style="padding:20px 2.5%;width:100%;vertical-align:middle">
+                    <h2>Teaching</h2>
+                    <ul class="teaching-list">
+                      <li class="teaching-item">
+                        <div class="teaching-role">Teaching Assistant, SOC 1315: <em>Macro-Organizational Theory: Organizations in Social Context</em></div>
+                        <div class="teaching-meta">Brown University, Spring 2026 &middot; Instructor: John Diamond</div>
+                      </li>
+                      <li class="teaching-item">
+                        <div class="teaching-role">Teaching Assistant, SOC 0315: <em>International Migration</em></div>
+                        <div class="teaching-meta">Brown University, Fall 2025 &middot; Instructor: Laura L&oacute;pez-Sanders</div>
+                      </li>
+                    </ul>
+                    <p class="students-note" style="margin-top:14px">Courses I am prepared to teach include <em>AI and Society</em> and <em>Organizational Sociology</em>, alongside courses in economic and political sociology, the sociology of work and technology, and computational and qualitative methods.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-          <div class="item">
-            <b>Computational Text Analysis of Climate Change Discourse on Twitter</b>
-            <div class="meta">
-              Project (Jun 2023 – Jan 2024)
-            </div>
-          </div>
+            <!-- FUNDING -->
+            <table class="teaching-section" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr>
+                  <td style="padding:20px 2.5%;width:100%;vertical-align:middle">
+                    <h2>Funding</h2>
+                    <p class="students-note">I am fortunate to have received funding from the China Initiative Dissertation Award, the Watson Institute for International and Public Affairs, the Population Studies Center, the Open Graduate Education Fellowship, and the Beatrice and Joseph Feinberg Memorial Fund.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-        </section>
+            <!-- CONTACT / FOOTER -->
+            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+              <tbody>
+                <tr>
+                  <td style="padding:20px 2.5%">
+                    <h2>Contact</h2>
+                    <p>Department of Sociology, Brown University<br>
+                    <a href="mailto:yitong_liu@brown.edu">yitong_liu@brown.edu</a></p>
+                    <br>
+                    <p style="text-align:left;font-size:small;">
+                      Website design adapted from <a href="https://github.com/alejandro-lozano-dev">Alejandro Lozano</a>, built on <a href="https://jonbarron.info/">Jon Barron</a>&rsquo;s <a href="https://github.com/jonbarron/jonbarron_website">template</a>.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-        <hr class="divider" />
+    <style>
+      .paper-item.no-link { cursor: default; }
+      .paper-tag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 5px 9px;
+        white-space: nowrap;
+      }
+      .paper-tag--accepted { color: var(--link); border-color: var(--link); }
+      .research-desc { margin-top: 6px; color: var(--text); line-height: 1.6; }
+      .profile-text-cell p { line-height: 1.65; }
+      .research-title { font-weight: 700; }
+      .grants-list .teaching-item { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 8px; padding-bottom: 8px; }
+      .grants-list .teaching-meta { margin: 0; white-space: nowrap; }
+      @media (max-width: 768px) {
+        .paper-item { display: block !important; margin-bottom: 14px; }
+        .papers-carousel-container .carousel-nav, .papers-carousel-container .carousel-indicators { display: none !important; }
+        .paper-item td:first-child { text-align: left; padding-bottom: 0 !important; }
+        .paper-item td { box-sizing: border-box; overflow-wrap: anywhere; }
+        .papers-table, .papers-table tbody { width: 100% !important; box-sizing: border-box; }
+      }
+      /* Keep the photo beside the text on tablets and narrow windows; stack only on phones */
+      @media (min-width: 540px) and (max-width: 768px) {
+        tr.profile-row { display: table-row !important; }
+        tr.profile-row td.profile-text-cell { display: table-cell !important; width: 62% !important; padding: 20px 2.5% !important; }
+        tr.profile-row td.profile-photo-cell { display: table-cell !important; width: 34% !important; vertical-align: middle; padding: 20px 2.5% !important; }
+        tr.profile-row div.profile-photo-mobile { display: none !important; }
+      }
+      @media (max-width: 539px) {
+        .profile-photo-mobile .profile-photo { border-radius: 50% !important; }
+      }
+    </style>
 
-        <section class="section" id="experience">
-          <h2>Work Experience</h2>
+    <script>
+      let currentPaperIndex = 0;
+      const papers = document.querySelectorAll('.paper-item');
+      const indicatorsContainer = document.querySelector('.carousel-indicators');
+      
+      // Make paper and report items clickable
+      document.querySelectorAll('.paper-item, .report-item').forEach(paper => {
+        paper.addEventListener('click', function(e) {
+          // Don't navigate if clicking on a link directly
+          if (e.target.tagName === 'A' || e.target.closest('a')) {
+            return;
+          }
+          
+          // Find the first link (title/project page link)
+          const firstLink = paper.querySelector('a');
+          if (firstLink && firstLink.href) {
+            window.location.href = firstLink.href;
+          }
+        });
+      });
+      
+      // Initialize carousel
+      function initCarousel() {
+        if (window.innerWidth <= 768) {
+          // Mobile view - show carousel
+          papers.forEach((paper, index) => {
+            paper.classList.remove('active');
+            if (index === 0) {
+              paper.classList.add('active');
+            }
+          });
+          
+          // Create indicators
+          if (indicatorsContainer) {
+            indicatorsContainer.innerHTML = '';
+            papers.forEach((paper, index) => {
+              const indicator = document.createElement('button');
+              indicator.className = 'carousel-indicator' + (index === 0 ? ' active' : '');
+              indicator.setAttribute('aria-label', `Go to paper ${index + 1}`);
+              indicator.onclick = () => goToPaper(index);
+              indicatorsContainer.appendChild(indicator);
+            });
+          }
+        } else {
+          // Desktop view - show all papers
+          papers.forEach(paper => {
+            paper.classList.add('active');
+          });
+        }
+      }
+      
+      function changePaper(direction) {
+        if (window.innerWidth > 768) return; // Only work on mobile
+        
+        currentPaperIndex += direction;
+        
+        if (currentPaperIndex < 0) {
+          currentPaperIndex = papers.length - 1;
+        } else if (currentPaperIndex >= papers.length) {
+          currentPaperIndex = 0;
+        }
+        
+        goToPaper(currentPaperIndex);
+      }
+      
+      function goToPaper(index) {
+        if (window.innerWidth > 768) return; // Only work on mobile
+        
+        currentPaperIndex = index;
+        
+        papers.forEach((paper, i) => {
+          paper.classList.remove('active');
+          if (i === index) {
+            paper.classList.add('active');
+          }
+        });
+        
+        // Update indicators
+        const indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
+        indicators.forEach((indicator, i) => {
+          indicator.classList.remove('active');
+          if (i === index) {
+            indicator.classList.add('active');
+          }
+        });
+      }
+      
+      // Initialize on load
+      window.addEventListener('load', initCarousel);
+      window.addEventListener('resize', initCarousel);
 
-          <div class="item">
-            <b>Data Scientist Intern, Supio</b>
-            <div class="meta">Jun 2025 – Aug 2025</div>
-            <ul>
-              <li>LLM-based narrative generation + analysis pipeline using entity extraction and multi-agent reasoning.</li>
-              <li>Built an interactive Streamlit dashboard with real-time metrics and custom filters.</li>
-              <li>Validated pipelines in Python/SQL with AWS-based loading and AI + human evaluation.</li>
-            </ul>
-          </div>
+      (function () {
+        var btn = document.getElementById('theme-toggle');
+        if (!btn) return;
+        function sync() {
+          var night = document.documentElement.classList.contains('night');
+          btn.setAttribute('aria-pressed', night ? 'true' : 'false');
+          btn.setAttribute('aria-label', night ? 'Switch to day mode' : 'Switch to night mode');
+          btn.setAttribute('title', night ? 'Day mode' : 'Night mode');
+        }
+        btn.addEventListener('click', function () {
+          window.__setTheme(!document.documentElement.classList.contains('night'));
+          sync();
+        });
+        document.addEventListener('themechange', sync);
+        sync();
+      })();
+      
+      // Touch swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      const carouselWrapper = document.querySelector('.papers-carousel-wrapper');
+      if (carouselWrapper) {
+        carouselWrapper.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        carouselWrapper.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        }, { passive: true });
+      }
+      
+      function handleSwipe() {
+        if (window.innerWidth > 768) return; // Only work on mobile
+        
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            // Swipe left - next paper
+            changePaper(1);
+          } else {
+            // Swipe right - previous paper
+            changePaper(-1);
+          }
+        }
+      }
+    </script>
 
-          <div class="item">
-            <b>Research Intern, Lifespan</b>
-            <div class="meta">Jan 2025 – Apr 2025</div>
-            <ul>
-              <li>3D computer vision for medical imaging; MRI-based glioblastoma prognosis and analysis.</li>
-              <li>Implemented and fine-tuned 3D U-Net and 3D TransNet for multi-modal segmentation.</li>
-            </ul>
-          </div>
-        </section>
+    <!-- Network Background Script -->
+    <script>
+      (function() {
+        const canvas = document.getElementById('network-bg');
+        const ctx = canvas.getContext('2d');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = () => window.innerWidth <= 768;
 
-        <hr class="divider" />
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+        let layers = [];
+        let mouse = { x: -9999, y: -9999 };
 
-        <section class="section" id="awards">
-          <h2>Selected Awards</h2>
-          <div class="item"><b>Open Graduate Education Fellowship</b> <span class="meta">(Brown University)</span></div>
-          <div class="item"><b>Watson Institute Pre-dissertation Award</b> <span class="meta">($5,000)</span></div>
-          <div class="item"><b>PSTC Summer Award</b> <span class="meta">($1,500)</span></div>
-        </section>
+        function makeLayer(opts) {
+          return {
+            nodes: [],
+            worldW: 0,
+            worldH: 0,
+            camX: 0,
+            camY: 0,
+            camVX: opts.camVX,
+            camVY: opts.camVY,
+            linkDist: opts.linkDist,
+            alpha: opts.alpha,
+            count: opts.count,
+            clusters: opts.clusters,
+            cellSize: opts.linkDist
+          };
+        }
 
-        <hr class="divider" />
+        function scatterNodes(layer) {
+          const nodes = [];
+          const clusterCount = layer.clusters;
+          const hubsPerCluster = isMobile() ? 3 : 5;
+          const perCluster = Math.floor(layer.count / clusterCount);
 
-        <section class="section" id="cv">
-          <h2>CV</h2>
-          <div class="meta">
-            View inline below or <a href="assets/Yitong_Liu_CV.pdf" target="_blank" rel="noopener">open the PDF</a>.
-          </div>
-          <iframe class="cvframe" src="assets/Yitong_Liu_CV.pdf" title="Yitong Liu CV (PDF)"></iframe>
-        </section>
-      </main>
-    </div>
-  </div>
-</body>
+          for (let c = 0; c < clusterCount; c++) {
+            const cx = (0.12 + Math.random() * 0.76) * layer.worldW;
+            const cy = (0.12 + Math.random() * 0.76) * layer.worldH;
+            const spread = Math.min(layer.worldW, layer.worldH) * (0.12 + Math.random() * 0.1);
+
+            for (let i = 0; i < perCluster; i++) {
+              const isHub = i < hubsPerCluster;
+              const ang = Math.random() * Math.PI * 2;
+              const rad = Math.pow(Math.random(), isHub ? 0.45 : 0.75) * spread;
+              nodes.push({
+                x: cx + Math.cos(ang) * rad,
+                y: cy + Math.sin(ang) * rad,
+                vx: (Math.random() - 0.5) * (isHub ? 0.1 : 0.2),
+                vy: (Math.random() - 0.5) * (isHub ? 0.1 : 0.2),
+                r: isHub ? 2.2 + Math.random() * 1.5 : 0.9 + Math.random() * 1.05,
+                hub: isHub,
+                cluster: c
+              });
+            }
+          }
+          layer.nodes = nodes;
+        }
+
+        function resize() {
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          const area = width * height;
+          const mobile = isMobile();
+          const farCount = mobile ? Math.min(260, Math.max(140, Math.floor(area / 6500))) : Math.min(780, Math.max(450, Math.floor(area / 3200)));
+          const midCount = mobile ? Math.min(320, Math.max(180, Math.floor(area / 5000))) : Math.min(1100, Math.max(650, Math.floor(area / 2200)));
+          const nearCount = mobile ? Math.min(220, Math.max(120, Math.floor(area / 7500))) : Math.min(720, Math.max(380, Math.floor(area / 3400)));
+
+          layers = [
+            makeLayer({
+              camVX: 0.05, camVY: 0.03,
+              linkDist: Math.max(150, Math.min(220, Math.sqrt(area) / 9)),
+              alpha: 0.55,
+              count: farCount,
+              clusters: mobile ? 5 : 8
+            }),
+            makeLayer({
+              camVX: 0.11, camVY: 0.07,
+              linkDist: Math.max(110, Math.min(170, Math.sqrt(area) / 12)),
+              alpha: 1,
+              count: midCount,
+              clusters: mobile ? 6 : 10
+            }),
+            makeLayer({
+              camVX: 0.18, camVY: 0.12,
+              linkDist: Math.max(80, Math.min(130, Math.sqrt(area) / 16)),
+              alpha: 0.85,
+              count: nearCount,
+              clusters: mobile ? 5 : 9
+            })
+          ];
+
+          layers.forEach(function (layer, i) {
+            const scale = i === 0 ? 2.8 : i === 1 ? 2.4 : 2.0;
+            layer.worldW = width * scale;
+            layer.worldH = height * scale;
+            layer.camX = (layer.worldW - width) * 0.5;
+            layer.camY = (layer.worldH - height) * 0.5;
+            layer.cellSize = layer.linkDist;
+            scatterNodes(layer);
+          });
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', function (e) {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        }, { passive: true });
+        window.addEventListener('mouseleave', function () {
+          mouse.x = -9999;
+          mouse.y = -9999;
+        });
+
+        function wrap(node, layer) {
+          if (node.x < 0) node.x += layer.worldW;
+          if (node.x > layer.worldW) node.x -= layer.worldW;
+          if (node.y < 0) node.y += layer.worldH;
+          if (node.y > layer.worldH) node.y -= layer.worldH;
+        }
+
+        function buildGrid(layer) {
+          const grid = {};
+          const size = layer.cellSize;
+          const nodes = layer.nodes;
+          for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            const gx = Math.floor(n.x / size);
+            const gy = Math.floor(n.y / size);
+            const key = gx + ',' + gy;
+            if (!grid[key]) grid[key] = [];
+            grid[key].push(i);
+          }
+          return grid;
+        }
+
+        function drawLayer(layer) {
+          if (!prefersReducedMotion) {
+            layer.camX += layer.camVX;
+            layer.camY += layer.camVY;
+            if (layer.camX > layer.worldW - width) layer.camX = 0;
+            if (layer.camY > layer.worldH - height) layer.camY = 0;
+          }
+
+          const mx = mouse.x + layer.camX;
+          const my = mouse.y + layer.camY;
+          const nodes = layer.nodes;
+          const maxDist = layer.linkDist;
+          const aMul = layer.alpha;
+          const night = document.documentElement.classList.contains('night');
+          const rgb = night ? '126, 182, 255' : '26, 115, 232';
+          const glow = night ? 1.45 : 1;
+
+          for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            if (!prefersReducedMotion) {
+              n.x += n.vx;
+              n.y += n.vy;
+              wrap(n, layer);
+
+              const dx = mx - n.x;
+              const dy = my - n.y;
+              const d2 = dx * dx + dy * dy;
+              if (d2 < 200 * 200 && d2 > 1) {
+                const pull = n.hub ? 0.0007 : 0.0004;
+                n.vx += dx * pull;
+                n.vy += dy * pull;
+              }
+
+              n.vx *= 0.993;
+              n.vy *= 0.993;
+              const speed = Math.hypot(n.vx, n.vy);
+              const max = n.hub ? 0.26 : 0.4;
+              if (speed > max) {
+                n.vx = (n.vx / speed) * max;
+                n.vy = (n.vy / speed) * max;
+              }
+            }
+          }
+
+          const grid = buildGrid(layer);
+          const size = layer.cellSize;
+
+          for (let i = 0; i < nodes.length; i++) {
+            const a = nodes[i];
+            const ax = a.x - layer.camX;
+            const ay = a.y - layer.camY;
+            if (ax < -maxDist || ax > width + maxDist || ay < -maxDist || ay > height + maxDist) continue;
+
+            const gx = Math.floor(a.x / size);
+            const gy = Math.floor(a.y / size);
+
+            for (let ox = -1; ox <= 1; ox++) {
+              for (let oy = -1; oy <= 1; oy++) {
+                const bucket = grid[(gx + ox) + ',' + (gy + oy)];
+                if (!bucket) continue;
+                for (let k = 0; k < bucket.length; k++) {
+                  const j = bucket[k];
+                  if (j <= i) continue;
+                  const b = nodes[j];
+                  const dx = a.x - b.x;
+                  const dy = a.y - b.y;
+                  const dist2 = dx * dx + dy * dy;
+                  const same = a.cluster === b.cluster;
+                  const reach = (same ? maxDist : maxDist * 0.72) * ((a.hub || b.hub) ? 1.3 : 1);
+                  if (dist2 > reach * reach) continue;
+
+                  const dist = Math.sqrt(dist2);
+                  const t = 1 - dist / reach;
+                  ctx.beginPath();
+                  ctx.moveTo(ax, ay);
+                  ctx.lineTo(b.x - layer.camX, b.y - layer.camY);
+                  const base = same ? 0.05 : 0.028;
+                  ctx.strokeStyle = 'rgba(' + rgb + ',' + ((base + t * 0.15) * aMul * glow) + ')';
+                  ctx.lineWidth = (a.hub || b.hub) ? 1.05 : 0.65;
+                  ctx.stroke();
+                }
+              }
+            }
+          }
+
+          for (let i = 0; i < nodes.length; i++) {
+            const n = nodes[i];
+            const x = n.x - layer.camX;
+            const y = n.y - layer.camY;
+            if (x < -8 || x > width + 8 || y < -8 || y > height + 8) continue;
+
+            if (n.hub) {
+              ctx.beginPath();
+              ctx.arc(x, y, n.r * 3.1, 0, Math.PI * 2);
+              ctx.fillStyle = 'rgba(' + rgb + ',' + (0.055 * aMul * glow) + ')';
+              ctx.fill();
+            }
+
+            ctx.beginPath();
+            ctx.arc(x, y, n.r, 0, Math.PI * 2);
+            ctx.fillStyle = n.hub
+              ? 'rgba(' + rgb + ',' + (0.55 * aMul * glow) + ')'
+              : 'rgba(' + rgb + ',' + (0.36 * aMul * glow) + ')';
+            ctx.fill();
+          }
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, width, height);
+          for (let i = 0; i < layers.length; i++) {
+            drawLayer(layers[i]);
+          }
+        }
+
+        function animate() {
+          draw();
+          requestAnimationFrame(animate);
+        }
+
+        resize();
+        animate();
+      })();
+    </script>
+  </body>
 </html>
